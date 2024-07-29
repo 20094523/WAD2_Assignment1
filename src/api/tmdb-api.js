@@ -47,7 +47,6 @@ export const getMovies = () => {
       }
       const creditsData = await creditsResponse.json();
   
-      // Combine movie data with actors
       return { ...movieData, actors: creditsData.cast };
     } catch (error) {
       throw error;
@@ -93,7 +92,24 @@ export const getMovies = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        // console.log(json.results);
         return json.results;
       });
+  };
+
+  export const getRecommendedMovies = async (movieId) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+      );
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch recommendations");
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching recommended movies:", error);
+      throw error;
+    }
   };

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Chip from "@mui/material/Chip";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from "../movieReviews"
+import MovieReviews from "../movieReviews";
+import MovieRecommendations from "../movieRecommendations";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
@@ -11,17 +12,18 @@ import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
 
 const root = {
-    display: "flex",
-    justifyContent: "center",
-    flexWrap: "wrap",
-    listStyle: "none",
-    padding: 1.5,
-    margin: 0,
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  listStyle: "none",
+  padding: 1.5,
+  margin: 0,
 };
 const chip = { margin: 0.5 };
 
 const MovieDetails = ({ movie }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [recDrawerOpen, setRecDrawerOpen] = useState(false);
 
   return (
     <>
@@ -33,70 +35,55 @@ const MovieDetails = ({ movie }) => {
         {movie.overview}
       </Typography>
 
-      <Paper 
-        component="ul" 
-        sx={{...root}}
-      >
+      <Paper component="ul" sx={{ ...root }}>
         <li>
-          <Chip label="Genres" sx={{...chip}} color="primary" />
+          <Chip label="Genres" sx={{ ...chip }} color="primary" />
         </li>
         {movie.genres.map((g) => (
           <li key={g.name}>
-            <Chip label={g.name} sx={{...chip}} />
+            <Chip label={g.name} sx={{ ...chip }} />
           </li>
         ))}
       </Paper>
-      
-      <Paper component="ul" sx={{...root}}>
+
+      <Paper component="ul" sx={{ ...root }}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
-        <Chip
-          icon={<MonetizationIcon />}
-          label={`${movie.revenue.toLocaleString()}`}
-        />
-        <Chip
-          icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count})`}
-        />
+        <Chip icon={<MonetizationIcon />} label={`${movie.revenue.toLocaleString()}`} />
+        <Chip icon={<StarRate />} label={`${movie.vote_average} (${movie.vote_count})`} />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
 
-      <Paper 
-        component="ul" 
-        sx={{...root}}
-      >
+      <Paper component="ul" sx={{ ...root }}>
         <li>
-          <Chip label="Production Countries" sx={{...chip}} color="primary" />
+          <Chip label="Production Countries" sx={{ ...chip }} color="primary" />
         </li>
         {movie.production_countries.map((g) => (
           <li key={g.iso_3166_1}>
-            <Chip label={g.name} sx={{...chip}} />
+            <Chip label={g.name} sx={{ ...chip }} />
           </li>
         ))}
       </Paper>
 
-      <Paper 
-        component="ul" 
-        sx={{...root}}
-      >
+      <Paper component="ul" sx={{ ...root }}>
         <li>
-          <Chip label="Actors" sx={{...chip}} color="primary" />
+          <Chip label="Actors" sx={{ ...chip }} color="primary" />
         </li>
-        
+
         {movie.actors.slice(0, 3).map((actor) => (
           <li key={actor.name}>
-            <Chip label={actor.name} sx={{...chip}} />
+            <Chip label={actor.name} sx={{ ...chip }} />
           </li>
         ))}
       </Paper>
-      
+
       <Fab
         color="secondary"
         variant="extended"
         onClick={() => setDrawerOpen(true)}
         sx={{
           position: 'fixed',
-          bottom: '1em',
-          right: '1em'
+          bottom: '4em',
+          right: '1em',
         }}
       >
         <NavigationIcon />
@@ -105,6 +92,21 @@ const MovieDetails = ({ movie }) => {
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1em' }}>
+        <Fab
+          color="primary"
+          variant="extended"
+          onClick={() => setRecDrawerOpen(true)}
+          sx={{
+            width: '150%',
+          }}
+        >
+          <NavigationIcon />
+          Recommended
+        </Fab>
+      </div>
+      <MovieRecommendations movie={movie} open={recDrawerOpen} onClose={() => setRecDrawerOpen(false)} />
     </>
   );
 };

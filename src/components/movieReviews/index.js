@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -21,13 +21,20 @@ export default function MovieReviews({ movie }) {
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{minWidth: 550}} aria-label="reviews table">
+    <TableContainer
+      component={Paper}
+      sx={{
+        backgroundColor: "rgba(255, 255, 255, 0.2)", // 80% transparent (0.2 opacity)
+        backdropFilter: "blur(5px)", // Optional: adds a blur effect
+        minWidth: 550
+      }}
+    >
+      <Table aria-label="reviews table">
         <TableHead>
           <TableRow>
-            <TableCell >Author</TableCell>
-            <TableCell align="center">Excerpt</TableCell>
-            <TableCell align="right">More</TableCell>
+            <TableCell sx={{ fontWeight: 'bold' }}>Author</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>Excerpt</TableCell>
+            <TableCell align="right" sx={{ fontWeight: 'bold' }}>More</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -36,13 +43,13 @@ export default function MovieReviews({ movie }) {
               <TableCell component="th" scope="row">
                 {r.author}
               </TableCell>
-              <TableCell >{excerpt(r.content)}</TableCell>
-              <TableCell >
-              <Link
+              <TableCell>{excerpt(r.content)}</TableCell>
+              <TableCell>
+                <Link
                   to={`/reviews/${r.id}`}
                   state={{
-                      review: r,
-                      movie: movie,
+                    review: r,
+                    movie: movie,
                   }}
                 >
                   Full Review
