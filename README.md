@@ -9,7 +9,6 @@ I have added a latest, watchlist and trending pages along with parametized endpo
 for each with their own seperate details.
 
 ### Features.
-[ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
  
 + All lab work complete e.g. production countries showing up, adding to watchlist working.
 + Watchlater page created, displaying movies in the same way favorites did.
@@ -18,7 +17,6 @@ for each with their own seperate details.
 + Alternative titles for each movie displaying.
 + A new UI element list and listitems was used on movieDetails.
 + A new page displaying most popular movies.
-+ //need to add search via actors
 + Added pagination for every single page in the project, updated api calls.
 
 

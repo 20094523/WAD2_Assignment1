@@ -13,7 +13,7 @@ import Typography from "@mui/material/Typography";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import { getAlternativeTitles } from "../../api/tmdb-api"; // Import the new API function
+import { getAlternativeTitles } from "../../api/tmdb-api"; 
 
 const root = {
   display: "flex",
