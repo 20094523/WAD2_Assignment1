@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chip from "@mui/material/Chip";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from "../movieReviews";
@@ -10,6 +10,10 @@ import StarRate from "@mui/icons-material/StarRate";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import { getAlternativeTitles } from "../../api/tmdb-api"; // Import the new API function
 
 const root = {
   display: "flex",
@@ -24,6 +28,20 @@ const chip = { margin: 0.5 };
 const MovieDetails = ({ movie }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [recDrawerOpen, setRecDrawerOpen] = useState(false);
+  const [alternativeTitles, setAlternativeTitles] = useState([]);
+
+  useEffect(() => {
+    const fetchAlternativeTitles = async () => {
+      try {
+        const titles = await getAlternativeTitles(movie.id);
+        setAlternativeTitles(titles);
+      } catch (error) {
+        console.error("Failed to fetch alternative titles:", error);
+      }
+    };
+
+    fetchAlternativeTitles();
+  }, [movie.id]);
 
   return (
     <>
@@ -74,6 +92,19 @@ const MovieDetails = ({ movie }) => {
             <Chip label={actor.name} sx={{ ...chip }} />
           </li>
         ))}
+      </Paper>
+
+      <Paper sx={{ padding: 2, marginTop: 2 }}>
+        <Typography variant="h6" component="h4">
+          Alternative Titles
+        </Typography>
+        <List>
+          {alternativeTitles.map((title) => (
+            <ListItem key={title.iso_3166_1}>
+              <ListItemText primary={title.title} />
+            </ListItem>
+          ))}
+        </List>
       </Paper>
 
       <Fab

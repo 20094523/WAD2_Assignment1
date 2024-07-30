@@ -12,9 +12,13 @@ for each with their own seperate details.
 [ A bullet-point list of the __new features__ you added to the Movies Fan app (and any modifications to existing features) .]
  
 + All lab work complete e.g. production countries showing up, adding to watchlist working.
++ Watchlater page created, displaying movies in the same way favorites did.
 + Actors added to moviesinfo.
-+ Got recommended movies working. First parameterised endpoint.
-+ etc
++ Got recommended movies working.
++ Alternative titles for each movie displaying.
++ A new UI element list and listitems was used on movieDetails.
++ A new page displaying most popular movies.
+
 
 ## Setup requirements.
 
@@ -22,19 +26,14 @@ No additional set-up steps necessary. Clone repo onto machine, add your TMDB api
 
 ## API endpoints.
 
-[ List the __additional__ TMDB endpoints used, giving the description and pathname for each one.] 
-
-e.g.
-+ Movie recommendations - /movies/:id/recommendations
-+ Upcoming movies - /movies/watchlaterpage
-+ //I need to add 2 more, 1 non para, one para. non para has link on top of site
++ Movie recommendations - /movie/:id/recommendations
++ Upcoming movies - /movie/watchlaterpage
++ Alternative titles - /movie/:id/alternative_titles
++ Popular movies - /movie/popular
 
 ## Routing.
 
-[ List the __new routes__ supported by your app and state the associated page.]
-
 + Movie recommendations - /movies/:id/recommendations
 + Upcoming movies - /movies/watchlaterpage
-+ //I need to add 2 more, 1 non para, one para. non para has link on top of site
-
-[If relevant, state what aspects of your app are protected (i.e. require authentication) and what is public.]
++ Recommended movies - /movies/:id/recommended
++ Popular movies - /movies/popular

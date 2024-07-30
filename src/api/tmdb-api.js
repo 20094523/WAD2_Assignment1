@@ -113,3 +113,36 @@ export const getMovies = () => {
       throw error;
     }
   };
+
+  export const getAlternativeTitles = async (movieId) => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/alternative_titles?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      );
+  
+      if (!response.ok) {
+        throw new Error("Failed to fetch alternative titles");
+      }
+  
+      const data = await response.json();
+      return data.titles.slice(0, 3); 
+    } catch (error) {
+      console.error("Error fetching alternative titles:", error);
+      throw error;
+    }
+  };
+
+
+  export const getPopular = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&page=1`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+       throw error
+    });
+  };
