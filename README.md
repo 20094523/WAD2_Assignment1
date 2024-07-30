@@ -22,7 +22,8 @@ for each with their own seperate details.
 
 ## Setup requirements.
 
-run npm install @mui/lab for pagination
+run npm install @mui/lab for pagination, no other imports necessary from what I remember.
+
 
 ## API endpoints.
 
