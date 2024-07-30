@@ -24,8 +24,8 @@ export default function MovieReviews({ movie }) {
     <TableContainer
       component={Paper}
       sx={{
-        backgroundColor: "rgba(255, 255, 255, 0.2)", // 80% transparent (0.2 opacity)
-        backdropFilter: "blur(5px)", // Optional: adds a blur effect
+        backgroundColor: "rgba(255, 255, 255, 0.2)", 
+        backdropFilter: "blur(5px)", 
         minWidth: 550
       }}
     >

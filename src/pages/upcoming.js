@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { getUpcoming } from "../api/tmdb-api";
 import PageTemplate from '../components/templateMovieListPage';
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import AddToWatchlist from '../components/cardIcons/addToWatchlist';
+import Pagination from '@mui/material/Pagination';
+import Grid from '@mui/material/Grid';
 
 const UpcomingPage = (props) => {
-  // Use useQuery hook for data fetching and caching
-  const { data, error, isLoading, isError } = useQuery('upcoming', getUpcoming);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data, error, isLoading, isError } = useQuery(
+    ['upcoming', currentPage],
+    () => getUpcoming(currentPage),
+    {
+      keepPreviousData: true,
+    }
+  );
 
   if (isLoading) {
     return <Spinner />;
@@ -23,14 +32,28 @@ const UpcomingPage = (props) => {
   const favorites = movies.filter(m => m.favorite);
   localStorage.setItem('favorites', JSON.stringify(favorites));
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
-    <PageTemplate
-      title="Upcoming Movies"
-      movies={movies}
-      action={(movie) => {
-        return <AddToWatchlist movie={movie} />
-      }}
-    />
+    <>
+      <PageTemplate
+        title="Upcoming Movies"
+        movies={movies}
+        action={(movie) => {
+          return <AddToWatchlist movie={movie} />;
+        }}
+      />
+      <Grid container justifyContent="center" sx={{ marginTop: '20px' }}>
+        <Pagination
+          count={data.total_pages}
+          page={currentPage}
+          onChange={handlePageChange}
+          color="primary"
+        />
+      </Grid>
+    </>
   );
 };
 

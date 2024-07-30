@@ -15,7 +15,6 @@ import WatchLaterPage from "./pages/watchLaterPage";
 import MovieRecommendations from "./components/movieRecommendations";
 import Popular from "./pages/popular";
 
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

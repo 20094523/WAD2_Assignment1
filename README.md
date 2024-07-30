@@ -18,11 +18,13 @@ for each with their own seperate details.
 + Alternative titles for each movie displaying.
 + A new UI element list and listitems was used on movieDetails.
 + A new page displaying most popular movies.
++ //need to add search via actors
++ Added pagination for every single page in the project, updated api calls.
 
 
 ## Setup requirements.
 
-No additional set-up steps necessary. Clone repo onto machine, add your TMDB api key to .env, npm install and npm run.
+run npm install @mui/lab for pagination
 
 ## API endpoints.
 
